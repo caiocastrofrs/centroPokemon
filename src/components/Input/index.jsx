@@ -5,7 +5,7 @@ const Input = ({ name, label, type = "text" }) => {
   // Aqui devemos acessar o estado global para obter os dados
   // do formulário e uma maneira de atualizá-los.
   const context = useContext(FormularioContext);
-  const { addOcorrencia } = context;
+  const { handleReducer } = context;
 
   // Além disso, usaremos um estado local para lidar com o estado da input.
   const [valorCampo, setValorCampo] = useState("");
@@ -21,7 +21,11 @@ const Input = ({ name, label, type = "text" }) => {
     // cada entrada.
     // DICA: Podemos usar o nome de cada entrada para salvar
     // os dados no estado global usando uma notação { chave: valor }
-    addOcorrencia(name, valorCampo);
+    if(name[name.length-1] === 'n') {
+      handleReducer('ATUALIZAR_POKEMON',{key: name, value: valorCampo});
+    } else {
+      handleReducer('ATUALIZAR_TREINADOR', {key: name, value: valorCampo});
+    }
   };
 
   return (
