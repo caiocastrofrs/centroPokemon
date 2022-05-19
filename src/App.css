@@ -166,6 +166,10 @@ h1 {
   color: #ed5564;
 }
 
+.lista p {
+  text-transform: capitalize;
+}
+
 .botao-enviar {
   padding: 0.6rem 3rem;
   border-radius: 10px;
