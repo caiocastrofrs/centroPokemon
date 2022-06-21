@@ -1,15 +1,26 @@
 import { Routes, Route } from "react-router-dom";
+import FormularioContextProvider from "./context/contextoFormulario";
+import { QueryClient, QueryClientProvider } from "react-query";
 import Inicio from "./components/Inicio";
 import Formulario from "./components/Formulario";
 import "./App.css";
-import FormularioContextProvider from './context/contextoFormulario';
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" exact element={<Inicio />} />
-        <Route path="/formularioEntrada" element={<FormularioContextProvider><Formulario /></FormularioContextProvider>} />
+        <Route path="/" element={<Inicio />} />
+        <Route
+          path="/formularioEntrada"
+          element={
+            <QueryClientProvider client={queryClient}>
+              <FormularioContextProvider>
+                <Formulario />
+              </FormularioContextProvider>
+            </QueryClientProvider>
+          }
+        />
       </Routes>
     </div>
   );

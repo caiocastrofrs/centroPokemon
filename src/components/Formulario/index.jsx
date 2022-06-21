@@ -5,6 +5,8 @@ import treinador from "../../assets/treinador.png";
 import pikachu from "../../assets/pikachu.png";
 import Input from "../Input";
 import Detalhe from "./detalhe";
+import Select from '../Select/Select';
+import { useQuery } from "react-query";
 
 // Neste componente temos nosso formulário e dentro dele
 // temos os componentes que precisam consumir nosso estado.
@@ -12,6 +14,19 @@ import Detalhe from "./detalhe";
 // componentes podem consumir um estado global.
 
 const Formulario = () => {
+
+
+  const getTypes = async () => {
+    const types = await fetch("https://pokeapi.co/api/v2/type/")
+    .then((res) => res.json())
+    .catch((e) => "error");
+    return types;
+  }
+
+  const query = useQuery("getTypes", getTypes);
+  
+  const {isLoading, error, data} = query;
+
   return (
     <>
       <header className="form-header">
@@ -49,7 +64,7 @@ const Formulario = () => {
                 <span>Pokémon</span>
               </p>
               <Input name="nomePokemon" label="Nome" />
-              <Input name="tipoPokemon" label="Tipo" />
+              <Select isLoading={isLoading} isDisabled={error && true} data={data?.results}/>
               <Input name="elementoPokemon" label="Elemento" />
               <Input name="alturaPokemon" label="Altura" />
               <Input name="idadePokemon" label="Idade" />

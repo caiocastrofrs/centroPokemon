@@ -111,6 +111,18 @@ h1 {
   margin-left: 1rem;
 }
 
+.input-receptor select {
+  background-color: #fff;
+  border: 2px solid darkgray;
+  width: 52%;
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.input-receptor select option {
+  text-transform: capitalize;
+}
 .formulario-entrada .corpo-formulario {
   display: flex;
   flex-direction: row;
@@ -140,6 +152,7 @@ h1 {
 .corpo-formulario .inputs {
   width: 40%;
   margin-left: 2rem;
+  
 }
 
 .nome-secao {
@@ -213,3 +226,4 @@ h1 {
 .retorna {
   justify-self: end;
 }
+

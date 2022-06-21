@@ -3,6 +3,7 @@ import { FormularioContext } from '../../context/contextoFormulario';
 
 
 const Detalhe = () => {
+  /* **/
   // Aqui devemos pegar os dados do formulário para podermos mostrá-lo em a visualização.
   const context = useContext(FormularioContext);
   const { state } = context;
