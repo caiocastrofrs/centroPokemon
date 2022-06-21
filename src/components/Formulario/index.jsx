@@ -6,7 +6,7 @@ import pikachu from "../../assets/pikachu.png";
 import Input from "../Input";
 import Detalhe from "./detalhe";
 import Select from '../Select/Select';
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 
 // Neste componente temos nosso formulário e dentro dele
 // temos os componentes que precisam consumir nosso estado.
@@ -14,7 +14,6 @@ import { useQuery } from "react-query";
 // componentes podem consumir um estado global.
 
 const Formulario = () => {
-
 
   const getTypes = async () => {
     const types = await fetch("https://pokeapi.co/api/v2/type/")
@@ -26,6 +25,8 @@ const Formulario = () => {
   const query = useQuery("getTypes", getTypes);
   
   const {isLoading, error, data} = query;
+
+  
 
   return (
     <>

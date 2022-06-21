@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { FormularioContext } from '../../context/contextoFormulario';
 import PropTypes from 'prop-types';
 
@@ -16,6 +16,13 @@ const Input = ({ name, label, type = "text" }) => {
   // do formulário e uma maneira de atualizá-los.
   const context = useContext(FormularioContext);
   const { handleReducer } = context;
+  const inputRef = useRef(null);
+
+  const borderColorOnLoadScreen = () => {
+    inputRef.current.style.borderColor = 'red';
+  }
+
+  useEffect(borderColorOnLoadScreen);
 
   // Além disso, usaremos um estado local para lidar com o estado da input.
   const [valorCampo, setValorCampo] = useState("");
@@ -26,6 +33,7 @@ const Input = ({ name, label, type = "text" }) => {
    * @param {Event} e 
    * 
    */
+
   const onInputChange = (e) => {
     setValorCampo(e.target.value);
   };
@@ -53,6 +61,7 @@ const Input = ({ name, label, type = "text" }) => {
     <div className="input-receptor">
       <label htmlFor={name}>{label}</label>
       <input
+        ref={inputRef}
         type={type}
         id={name}
         onChange={onInputChange}
