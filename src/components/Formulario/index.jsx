@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import pokebola from "../../assets/pokebola.png";
 import treinador from "../../assets/treinador.png";
@@ -6,7 +6,9 @@ import pikachu from "../../assets/pikachu.png";
 import Input from "../Input";
 import Detalhe from "./detalhe";
 import Select from '../Select/Select';
-import { useQuery, useMutation } from "react-query";
+import Button from '../Button/Button';
+import Modal from '../Modal/Modal';
+import { useQuery } from "react-query";
 
 // Neste componente temos nosso formulário e dentro dele
 // temos os componentes que precisam consumir nosso estado.
@@ -14,7 +16,7 @@ import { useQuery, useMutation } from "react-query";
 // componentes podem consumir um estado global.
 
 const Formulario = () => {
-
+  const [modalStatus, setModalStatus] = useState(false);
   const getTypes = async () => {
     const types = await fetch("https://pokeapi.co/api/v2/type/")
     .then((res) => res.json())
@@ -22,11 +24,17 @@ const Formulario = () => {
     return types;
   }
 
-  const query = useQuery("getTypes", getTypes);
-  
-  const {isLoading, error, data} = query;
 
-  
+
+  const queryTypes = useQuery("getTypes", getTypes);
+
+
+
+  const {isLoadingType, errorType, dataType} = queryTypes;
+
+  const modalHandler = () => {
+    setModalStatus(prevState => !prevState);
+  }
 
   return (
     <>
@@ -40,6 +48,8 @@ const Formulario = () => {
         </Link>
       </header>
       <div className="formulario-entrada">
+        {modalStatus && 
+        <Modal />}
         <h3>Solicitação de atenção</h3>
         <p>
           Por favor, preencha o formulário para que possamos mostrar seu Pokémon
@@ -64,8 +74,9 @@ const Formulario = () => {
                 <img src={pikachu} alt="pikachu" />
                 <span>Pokémon</span>
               </p>
+              <Button text="Selecionar" onClickFn={modalHandler} />
               <Input name="nomePokemon" label="Nome" />
-              <Select isLoading={isLoading} isDisabled={error && true} data={data?.results}/>
+              <Select isLoading={isLoadingType} isDisabled={errorType && true} data={dataType?.results}/>
               <Input name="elementoPokemon" label="Elemento" />
               <Input name="alturaPokemon" label="Altura" />
               <Input name="idadePokemon" label="Idade" />

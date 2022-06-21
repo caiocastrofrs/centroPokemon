@@ -93,6 +93,7 @@ h1 {
   height: 100%;
   padding-bottom: 3rem;
   margin-top: 2rem;
+  position: relative;
 }
 
 .input-receptor {
@@ -183,7 +184,7 @@ h1 {
   text-transform: capitalize;
 }
 
-.botao-enviar {
+.botao-enviar, .select-pokemon {
   padding: 0.6rem 3rem;
   border-radius: 10px;
   background-color: #ed5564;
@@ -194,8 +195,11 @@ h1 {
   box-shadow: 4px 4px 4px lightgray;
   margin-bottom: 1rem;
   align-self: flex-end;
+  cursor: pointer;
 }
-
+.select-pokemon {
+  margin: 1rem auto;
+}
 .botao-enviar:hover {
   box-shadow: none;
   cursor: pointer;
@@ -227,3 +231,37 @@ h1 {
   justify-self: end;
 }
 
+.pokemons {
+  justify-content: center;
+  width: 500px;
+  height: 500px;
+  background-color: #FFF;
+  border: 5px solid #ed5564;
+  border-radius: 5px;
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pokemons > div {
+  margin: 2rem;
+  max-height: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pokemons > div > div {
+  background-color: #ed5564;
+  width: max-content;
+  color: #fff;
+  margin: .5rem;
+  padding: .5rem;
+  border-radius: 10px;
+  transition: transform .1s ease;
+}
+.pokemons > div > div:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
